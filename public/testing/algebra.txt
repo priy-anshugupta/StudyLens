@@ -1,0 +1,7 @@
+Solving Simple Linear Equations
+
+An equation states that two expressions are equal. To solve an equation, find the value of the unknown that makes the statement true. Performing the same valid operation on both sides preserves equality.
+
+Consider x + 3 = 8. Subtract 3 from both sides to obtain x = 5. Check the result by substitution: 5 + 3 = 8.
+
+Now consider 2x = 12. Divide both sides by 2 to obtain x = 6. The expression 2x means two times x. Substituting 6 gives 2 times 6 = 12. A solution should be checked in the original equation.
