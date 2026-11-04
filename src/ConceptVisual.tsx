@@ -94,7 +94,7 @@ export default function ConceptVisual({ lessonId, blockId, onSpeak, onStop, busy
           })}
         </svg>
         </div>
-        <div className="concept-playback"><button className="btn btn-small" onClick={() => { onStop(); if (!playing && step === plan.steps.length - 1) setStep(0); setPlaying(!playing); }}>{playing ? <Pause size={15} /> : <Play size={15} />}{playing ? "Pause walkthrough" : "Play walkthrough"}</button><span>Move at your own pace</span></div>
+        <div className="concept-playback"><button className="btn btn-small" aria-pressed={playing} onClick={() => { onStop(); if (!playing && step === plan.steps.length - 1) setStep(0); setPlaying(!playing); }}>{playing ? <Pause size={15} /> : <Play size={15} />}{playing ? "Pause walkthrough" : "Play walkthrough"}</button><span>Move at your own pace</span></div>
       </div>
       <div className="concept-written">
         <span className="eyebrow">THE PICTURE, IN WORDS</span>
