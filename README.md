@@ -14,6 +14,10 @@ Turn a textbook page into an explanation you can **read, explore visually, liste
 
 ---
 
+![PageAble homepage — Your textbook. Your way in.](docs/screenshots/homepage.jpg)
+
+[View the full homepage screenshot](docs/screenshots/homepage-full.jpg)
+
 ## The problem
 
 A printed textbook usually offers one presentation of an idea. A learner may need shorter passages, a diagram they can explore, spoken explanations, larger text, or a chance to explain the idea in their own words. Switching between separate tools also separates explanations from the page they came from.
@@ -93,14 +97,6 @@ These are simplified teaching diagrams rendered by the app from validated data. 
 The authored sample works without API keys and includes fraction bars, number lines, typed scene requests, subdivision, undo, six checked practice items and a visual counterexample for a common mistake. Its simple phrase-matching teach-back feedback is labelled separately from live AI feedback.
 
 An authored Hindi sample preview is included. **Uploaded general lessons are currently in English**, and the Hindi preview still needs fluent review.
-
-## Screenshots
-
-![PageAble homepage](docs/screenshots/homepage.png)
-
-*Actual application screenshot supplied during development. Spacing and navigation were refined afterwards. It is not a generated UI mockup.*
-
-The decorative book artwork is generated imagery; concept diagrams and fraction geometry are rendered by the application. See [ASSETS.md](ASSETS.md).
 
 ## Run locally
 
