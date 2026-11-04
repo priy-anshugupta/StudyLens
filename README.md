@@ -225,7 +225,7 @@ flowchart LR
 
 - **FastAPI** handles uploads, provider calls, sessions, grading and speech.
 - **OpenAI Responses API** returns Pydantic-validated structures.
-- Original source quotations are checked before publishing generated lesson sections.
+- Lesson sections and questions select numbered original passages; the server attaches their exact wording and validates the references before publishing.
 - Visual generation selects numbered original passages; the server attaches their exact text.
 - Diagram nodes, connections, explanation coverage and source references are validated, with at most one repair attempt for invalid drafts.
 - Server-held multiple-choice keys are graded deterministically after the learner submits an answer.
@@ -283,7 +283,7 @@ Local interactive API documentation: `http://127.0.0.1:8000/api/docs`.
 
 | Check | Observed result |
 | --- | --- |
-| Backend automated tests | **51 passed** |
+| Backend automated tests | **53 passed** |
 | Existing frontend learning checks | **14 passed** |
 | UI flow helpers | Passed file/text boundaries, complete diagram labels and safe lesson restoration |
 | Static React rendering | Passed home, upload, sample studio, recap and general science output checks |

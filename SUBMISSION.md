@@ -49,7 +49,7 @@ The first implementation focused too narrowly on fractions, so the lesson pipeli
 
 ### Results
 
-51 backend tests, 14 existing learning behavior checks, UI helper checks, static React rendering checks and a production build pass. Live image extraction, lesson creation, visual generation, practice submission and recap passed a source-page smoke test. These are engineering checks, not a measured accuracy benchmark or evidence of student learning gains.
+53 backend tests, 14 existing learning behavior checks, UI helper checks, static React rendering checks and a production build pass. Live image extraction, lesson creation, visual generation, practice submission and recap passed a source-page smoke test. These are engineering checks, not a measured accuracy benchmark or evidence of student learning gains.
 
 ### What is next
 

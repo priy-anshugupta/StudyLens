@@ -35,6 +35,28 @@ class TextbookLesson(Model):
     supported: bool
     blocks: list[Topic] = Field(max_length=3)
 
+class LessonQuestionDraft(Model):
+    prompt: str
+    choices: list[str] = Field(min_length=3, max_length=4)
+    correct_index: int = Field(ge=0, le=3)
+    explanation: str
+    source_id: int = Field(ge=0)
+
+class LessonTopicDraft(Model):
+    title: str
+    text: str
+    source_id: int = Field(ge=0)
+    key_points: list[str] = Field(min_length=2, max_length=3)
+    teach_prompt: str
+    questions: list[LessonQuestionDraft] = Field(min_length=2, max_length=2)
+    visual: Literal['none', 'fractions']
+
+class LessonDraft(Model):
+    title: str
+    subject: str
+    supported: bool
+    blocks: list[LessonTopicDraft] = Field(max_length=3)
+
 class Build(Model):
     document_id: str = ''
     source: str = Field(min_length=20, max_length=6000)
@@ -113,6 +135,18 @@ class VisualDraft(Model):
 def source_passages(source: str):
     return [p.strip() for p in re.split(r'(?<=[.!?])\s+|\n+', source) if p.strip()]
 
+def resolve_lesson(draft: LessonDraft, passages: list[str]):
+    def quote(index):
+        if index >= len(passages):
+            raise HTTPException(422, 'A lesson referenced a missing source passage. Please try again.')
+        return passages[index]
+    return TextbookLesson(title=draft.title, subject=draft.subject, supported=draft.supported, blocks=[
+        Topic(title=b.title, text=b.text, source_quote=quote(b.source_id), key_points=b.key_points,
+            teach_prompt=b.teach_prompt, visual=b.visual, questions=[
+                Question(prompt=q.prompt, choices=q.choices, correct_index=q.correct_index,
+                    explanation=q.explanation, source_quote=quote(q.source_id)) for q in b.questions])
+        for b in draft.blocks])
+
 def resolve_visual(draft: VisualDraft, passages: list[str]):
     def quote(index):
         if index >= len(passages):
@@ -167,22 +201,29 @@ def register(app, generate, untrusted):
         instructions = (RULES +
             ' Build a short lesson in English. Detect the actual subject; do not convert it to fractions. '
             'Produce 1-3 focused blocks, each with 2-3 distinct key points, a relevant teach-back prompt, and exactly two multiple-choice questions. '
-            'Each question needs one unambiguously correct answer, plausible distractors, an explanatory answer, and an EXACT contiguous source_quote. '
+            'Each question needs one unambiguously correct answer, plausible distractors, an explanatory answer, and a source_id from source_passages supporting its answer. '
             'correct_index is ZERO-BASED: 0 for the first choice, 1 for the second, 2 for the third; never use 3 with only three choices. '
-            'Each block also needs an EXACT source_quote. Keep explanations short and appropriate for the page. '
+            'Each block also needs a source_id from the numbered original source_passages. Never invent source IDs or citations. '
+            'Teach only concepts explicitly supported by the supplied material, including informative educational project posters. '
+            'Do not make personal names, student IDs or contact information into lesson topics or quiz answers. '
+            'Keep explanations short and appropriate for the page. '
             'Select visual=fractions ONLY if that block specifically teaches fractions, with no other kind of diagram implied. Otherwise visual=none. '
             'For material that cannot support a lesson, set supported=false and return no blocks.')
-        result = await generate(TextbookLesson, instructions, untrusted(source=body.source), max_tokens=6000)
+        passages = source_passages(body.source)
+        context = {'source_passages':dict(enumerate(passages))}
+        draft = await generate(LessonDraft, instructions, untrusted(**context), max_tokens=6000)
         try:
+            result = resolve_lesson(draft, passages)
             validate_lesson(result, body.source)
         except HTTPException as error:
-            if not result.supported or not result.blocks:
+            if not draft.supported or not draft.blocks:
                 raise
             # One repair attempt; validation is never bypassed for a fluent response.
-            result = await generate(TextbookLesson, instructions +
-                ' Repair the previous draft. Copy every source_quote literally from the supplied source, including mathematical notation. '
+            draft = await generate(LessonDraft, instructions +
+                ' Repair the previous draft. Use only existing source_ids from source_passages. '
                 'Check zero-based answer indexes, distinct choices, and distinct learning goals before returning.',
-                untrusted(source=body.source,previous_draft=result.model_dump(),validation_error=error.detail),max_tokens=6000)
+                untrusted(**context,previous_draft=draft.model_dump(),validation_error=error.detail),max_tokens=6000)
+            result = resolve_lesson(draft, passages)
             validate_lesson(result, body.source)
         lesson_id = secrets.token_urlsafe(16)
         private_questions = {}

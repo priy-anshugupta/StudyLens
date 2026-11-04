@@ -2,17 +2,17 @@ from unittest.mock import AsyncMock
 import pytest
 from fastapi.testclient import TestClient
 import backend.main as service
-from backend.general import TextbookLesson, Topic, Question, Feedback, Evidence
+from backend.general import TextbookLesson, Topic, Question, Feedback, Evidence, LessonDraft, LessonTopicDraft, LessonQuestionDraft, resolve_lesson
 from backend.general import VisualPlan, VisualNode, VisualLink, VisualStep, VisualDraft, VisualLinkDraft, VisualStepDraft, resolve_visual, source_passages, validate_visual
 
 SOURCE='Plants use sunlight to turn carbon dioxide and water into glucose. Oxygen is released during photosynthesis. Chlorophyll absorbs light energy in leaves.'
 
 def generated(subject='Science',title='Photosynthesis'):
-    return TextbookLesson(title=title,subject=subject,supported=True,blocks=[Topic(
-        title='How plants make food',text=SOURCE,source_quote=SOURCE,key_points=['Sunlight provides energy','Oxygen is released'],
+    return LessonDraft(title=title,subject=subject,supported=True,blocks=[LessonTopicDraft(
+        title='How plants make food',text=SOURCE,source_id=0,key_points=['Sunlight provides energy','Oxygen is released'],
         teach_prompt='Explain how a plant uses light to make food.',visual='none',questions=[
-            Question(prompt='What gas is released?',choices=['Oxygen','Nitrogen','Helium'],correct_index=0,explanation='The source says oxygen is released.',source_quote='Oxygen is released during photosynthesis.'),
-            Question(prompt='What absorbs light?',choices=['Glucose','Chlorophyll','Oxygen'],correct_index=1,explanation='Chlorophyll absorbs light energy.',source_quote='Chlorophyll absorbs light energy in leaves.')])])
+            LessonQuestionDraft(prompt='What gas is released?',choices=['Oxygen','Nitrogen','Helium'],correct_index=0,explanation='The source says oxygen is released.',source_id=1),
+            LessonQuestionDraft(prompt='What absorbs light?',choices=['Glucose','Chlorophyll','Oxygen'],correct_index=1,explanation='Chlorophyll absorbs light energy.',source_id=2)])])
 
 @pytest.fixture
 def client(monkeypatch):
@@ -49,7 +49,7 @@ def test_other_sessions_cannot_grade_or_read_a_lesson(client):
         assert other.post(f"/api/lessons/{lesson['id']}/attempts",json={'question_id':'b1-q1','choice_index':0,'submission_id':'test-attempt-2'}).status_code==404
 
 def test_source_citation_and_answer_bounds_are_enforced(client,monkeypatch):
-    content=generated();content.blocks[0].questions[0].source_quote='This is not in the page.'
+    content=generated();content.blocks[0].questions[0].source_id=99
     monkeypatch.setattr(service,'generate',AsyncMock(return_value=content))
     assert client.post('/api/lessons',json={'source':SOURCE}).status_code==422
     content=generated();content.blocks[0].questions[0].correct_index=3
@@ -129,3 +129,23 @@ def test_visual_source_ids_resolve_to_original_page_not_rewritten_text():
     validate_visual(plan,SOURCE)
     plan.steps[0].source_quote='Rewritten quotation'
     with pytest.raises(Exception):validate_visual(plan,SOURCE)
+
+
+def test_lesson_references_attach_original_words_with_unusual_whitespace(client,monkeypatch):
+    source='First original passage with punctuation:  x = 2.\n\nSecond original passage — with Unicode.\nThird original passage about learning.'
+    result=generated();result.blocks[0].source_id=1
+    monkeypatch.setattr(service,'generate',AsyncMock(return_value=result))
+    response=client.post('/api/lessons',json={'source':source})
+    assert response.status_code==200,response.text
+    lesson=response.json()
+    assert lesson['blocks'][0]['source_quote']=='Second original passage — with Unicode.'
+    for block in lesson['blocks']:
+        assert block['source_quote'] in source
+    attempt=client.post(f"/api/lessons/{lesson['id']}/attempts",json={'question_id':'b1-q1','choice_index':0,'submission_id':'source-reference-regression'})
+    assert attempt.json()['source_quote']=='Second original passage — with Unicode.'
+
+def test_lesson_missing_block_reference_is_rejected(client,monkeypatch):
+    result=generated();result.blocks[0].source_id=99
+    provider=AsyncMock(return_value=result);monkeypatch.setattr(service,'generate',provider)
+    assert client.post('/api/lessons',json={'source':SOURCE}).status_code==422
+    assert provider.await_count==2
