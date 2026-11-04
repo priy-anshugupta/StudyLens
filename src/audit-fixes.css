@@ -5,3 +5,7 @@
 
 .lesson-sidebar .sidebar-upload{display:flex;width:100%;gap:12px;min-height:48px;padding:13px 16px;margin:8px 0 24px;font-size:14px;border-radius:8px;box-shadow:0 4px 12px #253d3510}.mobile-upload{display:none}@media(max-width:650px){.studio-main>.mobile-upload{display:flex;width:100%;gap:12px;margin:0 0 22px;font-size:14px;border-radius:8px;min-height:48px}}
 
+
+/* Hide the page scrollbar without disabling scrolling or nested controls. */
+html,body{scrollbar-width:none;-ms-overflow-style:none}
+html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
