@@ -1,0 +1,22 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+*.tsbuildinfo
+output/
+.openai/.local/
+
+# Local hosting state and machine-specific settings
+.openai/
+.vscode/
+.idea/
+*.log
+*.pem
+*.key
+.DS_Store
+Thumbs.db
