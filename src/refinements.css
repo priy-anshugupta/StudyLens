@@ -1,0 +1,351 @@
+/* Readable interface detail and finished cover treatment. */
+.mobile-concept-select {
+  display: none;
+}
+.focus-steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #d4dec8;
+  padding-top: 9px;
+  margin-block: 12px;
+  font-size: 11px;
+  color: #61794e;
+}
+.focus-steps .text-btn {
+  font-size: 11px;
+}
+.is-speaking .lesson-reading > p {
+  background: #e9efdd;
+  box-shadow: -7px 0 0 #78955f;
+  padding: 5px 9px;
+  border-radius: 2px;
+  transition: background 0.2s;
+}
+.fraction-bar {
+  min-width: 0;
+}
+.fraction-bar > span {
+  min-width: 0;
+}
+.lesson-cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.lesson-cover > span {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+}
+.lesson-cover h2 {
+  margin: 0;
+  font-size: 22px;
+  max-width: 185px;
+}
+.lesson-cover:after {
+  background: linear-gradient(0deg, #e6e8db 5%, #e6e8dbcc 32%, #e6e8db11 90%);
+}
+.lesson-outline strong {
+  font-size: 12px;
+}
+.lesson-outline small {
+  font-size: 10px;
+  color: #68795d;
+}
+.outline-label {
+  font-size: 9px;
+  color: #65775b;
+}
+.back-link {
+  font-size: 11px;
+  color: #637459;
+}
+.sidebar-bottom {
+  color: #5e7453;
+}
+.lesson-sidebar > .text-btn {
+  font-size: 11px;
+}
+.studio-topline .eyebrow {
+  font-size: 9px;
+  color: #546d48;
+}
+.source-toggle {
+  font-size: 11px;
+  color: #65795c;
+}
+.chapter-label {
+  font-size: 9px;
+  color: #637657;
+}
+.destination-tabs button {
+  font-size: 12px;
+  color: #64775a;
+}
+.mode-control button {
+  font-size: 11px;
+  color: #617556;
+}
+.ask-trigger {
+  font-size: 11px;
+  color: #617556;
+}
+.source-citation {
+  font-size: 10px;
+  color: #5f7451;
+}
+.scene-top .eyebrow {
+  font-size: 9px;
+  color: #5e7452;
+}
+.scene-buttons button {
+  font-size: 10px;
+  color: #5e7452;
+}
+.fraction-label > span:last-child:not(.fraction-text) {
+  font-size: 10px;
+  color: #607653;
+}
+.equivalence-note {
+  font-size: 12px;
+}
+.equivalence-note.is-equal {
+  color: #54723f;
+}
+.scene-caption {
+  font-size: 10px;
+  color: #607650;
+}
+.scene-caption .text-btn {
+  font-size: 10px;
+}
+.fraction-controls {
+  font-size: 10px;
+  color: #5b744a;
+}
+.fraction-controls label {
+  font-size: 10px;
+}
+.command-input input {
+  font-size: 13px;
+  color: #3f6036;
+}
+.command-input input::placeholder {
+  color: #6e805f;
+}
+.command-suggestions > span {
+  color: #697d56;
+}
+.command-suggestions button {
+  font-size: 9px;
+  color: #5d754c;
+}
+.activity-next > span {
+  font-size: 12px;
+  color: #647a55;
+}
+.activity-next .btn {
+  font-size: 12px;
+}
+.studio-footer {
+  font-size: 10px;
+  color: #627754;
+}
+.preview-mode {
+  color: #637957;
+}
+.feature-no,
+.eyebrow {
+  color: #637357;
+}
+.hero-footnote {
+  color: #68755e;
+}
+.hero-description {
+  color: #5f6b59;
+}
+.section-top > p,
+.ways-grid p,
+.human-copy p {
+  color: #627456;
+}
+.preference-tags span {
+  color: #5f7452;
+}
+.closing-note,
+.site-footer > span {
+  color: #637455;
+}
+.chapter-label,
+.source-tag,
+.field-label {
+  color: #627753;
+}
+.textarea-actions > span,
+.textarea-actions .text-btn {
+  color: #647b53;
+}
+.engine-label {
+  font-size: 11px;
+  color: #657a53;
+}
+.rubric-row p {
+  font-size: 12px;
+  color: #60784e;
+}
+.rubric-status {
+  font-size: 9px;
+}
+.practice-meta {
+  color: #657d51;
+}
+.typed-answer {
+  font-size: 12px;
+  color: #657b53;
+}
+.answer-feedback p {
+  color: #62724b;
+}
+.context-answer p {
+  color: #5f784c;
+}
+.connection-row p,
+.about-content > p,
+.source-review > .muted,
+.summary-disclosure {
+  color: #657b53;
+}
+.inline-note {
+  font-size: 11px;
+  color: #7d6940;
+}
+.summary-header p,
+.recap-stats p,
+.attempt-row p,
+.next-practice p,
+.page-heading p,
+.upload-surface > p {
+  color: #617a4f;
+}
+.result-label {
+  font-size: 10px;
+  color: #806237;
+}
+.result-label.positive {
+  color: #4e6d35;
+}
+.small .equivalence-note {
+  font-size: 10px;
+}
+.hero-art {
+  isolation: isolate;
+}
+@media (max-width: 850px) {
+  .lesson-outline strong {
+    font-size: 11px;
+  }
+  .lesson-outline small {
+    font-size: 9px;
+  }
+  .lesson-cover h2 {
+    font-size: 20px;
+  }
+  .scene-top .eyebrow {
+    font-size: 8px;
+  }
+  .fraction-label > span:last-child:not(.fraction-text) {
+    display: none;
+  }
+  .destination-tabs {
+    gap: 15px;
+  }
+  .destination-tabs button {
+    font-size: 11px;
+  }
+  .scene-buttons button {
+    font-size: 9px;
+  }
+  .rubric-status {
+    font-size: 8px;
+  }
+}
+@media (max-width: 650px) {
+  .studio-topline .eyebrow {
+    font-size: 8px;
+  }
+  .source-toggle {
+    font-size: 10px;
+  }
+  .destination-tabs button {
+    font-size: 10px;
+  }
+  .mode-control button {
+    font-size: 11px;
+  }
+  .ask-trigger {
+    font-size: 10px;
+  }
+  .scene-top .eyebrow {
+    max-width: 120px;
+    font-size: 8px;
+  }
+  .scene-buttons button {
+    font-size: 9px;
+  }
+  .fraction-controls {
+    font-size: 9px;
+  }
+  .fraction-controls label {
+    font-size: 8px;
+  }
+  .command-suggestions button {
+    font-size: 8px;
+  }
+  .activity-next > span {
+    font-size: 11px;
+  }
+  .activity-next .btn {
+    font-size: 11px;
+  }
+  .rubric-status {
+    font-size: 8px;
+  }
+  .studio-footer {
+    font-size: 9px;
+  }
+  .header-actions .language-trigger {
+    font-size: 11px;
+  }
+  .typed-answer {
+    font-size: 11px;
+  }
+  .hero-footnote {
+    font-size: 10px;
+  }
+}
+@media (max-width: 650px) {
+  .mobile-concept-select {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 24px;
+    font-size: 8px;
+    letter-spacing: 1px;
+    color: #657b53;
+  }
+  .mobile-concept-select select {
+    max-width: 65%;
+    padding: 8px;
+    border: 1px solid #d1dcc6;
+    border-radius: 4px;
+    color: #48673d;
+    background: #f6f8ed;
+    font-size: 11px;
+    letter-spacing: 0;
+  }
+  .studio-heading {
+    margin-top: 21px;
+  }
+}
