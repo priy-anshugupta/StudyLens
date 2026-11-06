@@ -309,9 +309,22 @@ async def synthesize(body: NarrationRequest):
         async with speech_lock, httpx.AsyncClient(timeout=40) as client:
             r = await client.post('https://api.vachana.ai/api/v1/tts/inference', headers={'X-API-Key-ID':api_key}, json={'text':body.text,'model':config.get('GNANI_TTS_MODEL','timbre-v2.5'),'voice':voice,'language':body.language,'speed':1.0,'audio_config':{'encoding':'linear_pcm','container':'wav','sample_rate':24000,'sample_width':2,'num_channels':1}})
             r.raise_for_status()
-            if not r.content.startswith(b'RIFF'):
-                raise ValueError('Unexpected audio response.')
-        return {'audio':base64.b64encode(r.content).decode(),'content_type':'audio/wav'}
+        # Timbre can return a streaming WAV header with placeholder lengths.
+        # Write a complete container using the PCM frames actually received.
+        with wave.open(io.BytesIO(r.content), 'rb') as audio:
+            if audio.getnchannels() != 1 or audio.getsampwidth() != 2:
+                raise ValueError('Unexpected narration format.')
+            rate = audio.getframerate()
+            frames = audio.readframes(min(audio.getnframes(), len(r.content) // 2))
+        if not frames or len(frames) % 2:
+            raise ValueError('Incomplete narration audio.')
+        output = io.BytesIO()
+        with wave.open(output, 'wb') as audio:
+            audio.setnchannels(1)
+            audio.setsampwidth(2)
+            audio.setframerate(rate)
+            audio.writeframes(frames)
+        return {'audio':base64.b64encode(output.getvalue()).decode(),'content_type':'audio/wav'}
     except Exception:
         raise HTTPException(502, 'Narration is unavailable right now. Your lesson remains readable.')
 

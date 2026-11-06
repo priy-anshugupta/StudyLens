@@ -1,5 +1,7 @@
 """Contract tests use mocked providers; no keys or network calls are consumed."""
+import base64
 import io
+import struct
 import wave
 from unittest.mock import AsyncMock
 
@@ -100,6 +102,21 @@ def test_speech_adapters_preserve_audio_contracts(client, monkeypatch):
 
 def test_invalid_recording_does_not_reach_provider(client):
     assert client.post('/api/speech/transcribe',files={'audio':('recording.wav',b'not wav','audio/wav')}).status_code == 422
+
+
+def test_narration_repairs_streaming_wav_lengths(client, monkeypatch):
+    original = wav()
+    streaming = bytearray(original)
+    struct.pack_into('<I', streaming, 4, 0x7fffffff)
+    struct.pack_into('<I', streaming, 40, 0x7fffffff)
+    transport = httpx.MockTransport(lambda _: httpx.Response(200, content=bytes(streaming)))
+    async_client = httpx.AsyncClient
+    monkeypatch.setattr(service.httpx, 'AsyncClient', lambda **kwargs: async_client(transport=transport, **kwargs))
+
+    response = client.post('/api/speech/synthesize', json={'text': 'The lamp lights up.'})
+
+    assert response.status_code == 200
+    assert base64.b64decode(response.json()['audio']) == original
 
 def test_provider_errors_do_not_leak_upstream_body(client, monkeypatch):
     original=httpx.AsyncClient
