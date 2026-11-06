@@ -37,7 +37,6 @@ The same confirmed source stays available throughout. Explanations and feedback 
 
 | Item | Detail |
 | --- | --- |
-| Project origin | Based on [PageAble](https://github.com/priy-anshugupta/PageAble) by the same author |
 | Primary AI/ML language | Python |
 | AI integration | OpenAI for page understanding and structured lessons; Gnani.ai for speech |
 | Interface | React, TypeScript, Vite and authored CSS |
