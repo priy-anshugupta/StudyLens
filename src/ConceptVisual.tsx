@@ -89,7 +89,10 @@ export default function ConceptVisual({ lessonId, blockId, onSpeak, onStop, busy
               <rect x="-83" y="-65" width="166" height="130" rx="24" />
               <Icon x={-16} y={-44} size={32} strokeWidth={1.5} />
               <text textAnchor="middle" y={0}>{lines.map((line, j) => <tspan key={j} x="0" dy={j ? 18 : 0}>{line}</tspan>)}</text>
-              <circle cx="-66" cy="-52" r="13" /><text className="concept-node-number" x="-66" y="-47" textAnchor="middle">{i + 1}</text>
+              <g aria-hidden="true">
+                <circle cx="-58" cy="-42" r="13" />
+                <text className="concept-node-number" x="-58" y="-42" textAnchor="middle" dominantBaseline="central">{i + 1}</text>
+              </g>
             </g>;
           })}
         </svg>
