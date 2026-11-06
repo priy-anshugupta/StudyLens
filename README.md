@@ -37,7 +37,7 @@ The same confirmed source stays available throughout. Explanations and feedback 
 
 | Item | Detail |
 | --- | --- |
-| Project origin | [PageAble](https://github.com/priy-anshugupta/PageAble), originally submitted to [Neural Storm 2026](https://neuralstorm.devpost.com/) under HI-03 |
+| Project origin | Based on [PageAble](https://github.com/priy-anshugupta/PageAble) by the same author |
 | Primary AI/ML language | Python |
 | AI integration | OpenAI for page understanding and structured lessons; Gnani.ai for speech |
 | Interface | React, TypeScript, Vite and authored CSS |
@@ -325,8 +325,8 @@ Example pages are in `public/testing/`. A fresh photo upload demonstrates extrac
 - A backend restart or session expiration invalidates server-owned generation/grading operations; rebuild the lesson to continue.
 - Deleting app session data does not claim to delete data retained by providers.
 - Source evidence establishes where wording came from, not whether every model interpretation or connection is correct.
-- The single-worker in-memory backend is a hackathon prototype, without school accounts, persistent classes, multi-worker storage, comprehensive production abuse protection or measured disability-specific effectiveness.
-- A static frontend deployment supports the sample, but the complete experience needs the Python service. The earlier private Sites preview is not a public full-stack judge demo.
+- The prototype uses a single-worker in-memory backend. School accounts, persistent classes, multi-worker storage, comprehensive production abuse protection and measured disability-specific effectiveness are outside its current scope.
+- A static frontend deployment supports the sample. The full experience requires the Python service.
 
 ## AI development and asset disclosure
 
@@ -338,7 +338,6 @@ The repository's initial publication is organized into feature-based commits ass
 
 ## Additional documentation
 
-- [Submission checklist and prepared project description](SUBMISSION.md)
 - [Product requirements](docs/PRODUCT_REQUIREMENTS.md) — includes historical scope decisions; current supported behavior is documented above.
 - [Verification history](EVALUATION.md)
 - [UI audit](UI_AUDIT.md)
@@ -346,5 +345,6 @@ The repository's initial publication is organized into feature-based commits ass
 
 ## Author
 
-**Priyanshu Gupta** · Solo participant  
+**Priyanshu Gupta**
+
 [GitHub profile](https://github.com/priy-anshugupta)
