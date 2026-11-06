@@ -39,3 +39,101 @@ main[tabindex="-1"]:focus{outline:none}
 .upload-surface > .replace-page-btn:hover:not(:disabled) {
   background: #e4ebdb;
 }
+
+.upload-surface .file-note,
+.upload-surface .image-quality-tip,
+.upload-surface .privacy-note,
+.source-review > .muted,
+.source-text-count,
+.studio-main .source-citation {
+  font-size: 13px;
+  color: #4f6349;
+}
+
+.studio-main .destination-tabs button {
+  font-size: 13px;
+  color: #4f6349;
+}
+
+.studio-main .destination-tabs button[aria-selected="true"] {
+  color: #315d49;
+}
+
+.mobile-section-picker {
+  display: none;
+}
+
+@media (max-width: 650px) {
+  .mobile-section-picker {
+    display: block;
+    margin-top: 24px;
+    border: 1px solid #b6c2ad;
+    border-radius: 8px;
+    background: #f6f8ed;
+    color: #315d49;
+  }
+
+  .mobile-section-picker summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: inherit;
+    cursor: pointer;
+  }
+
+  .mobile-section-picker summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-section-picker summary:focus-visible {
+    outline: 3px solid #bd6549;
+    outline-offset: 2px;
+  }
+
+  .mobile-section-picker summary span {
+    min-width: 0;
+  }
+
+  .mobile-section-picker small {
+    display: block;
+    font-size: 13px;
+    color: #4f6349;
+  }
+
+  .mobile-section-picker strong,
+  .mobile-section-picker nav button {
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  .mobile-section-picker[open] summary svg {
+    transform: rotate(180deg);
+  }
+
+  .mobile-section-picker nav {
+    display: grid;
+    gap: 4px;
+    padding: 6px;
+    border-top: 1px solid #b6c2ad;
+  }
+
+  .mobile-section-picker nav button {
+    min-height: 44px;
+    padding: 8px 10px;
+    border-radius: 5px;
+    text-align: left;
+  }
+
+  .mobile-section-picker nav button[aria-current="step"],
+  .mobile-section-picker nav button:hover:not(:disabled) {
+    background: #e2ebda;
+  }
+
+  .general-studio .destination-tabs button {
+    min-width: 0;
+    justify-content: center;
+  }
+}

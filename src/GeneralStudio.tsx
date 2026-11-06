@@ -5,6 +5,7 @@ import {
   ArrowUpRight,
   BookOpen,
   CheckCircle2,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Eye,
@@ -468,21 +469,35 @@ export default function GeneralStudio({
             <ChevronRight size={14} />
           </button>
         </div>
-        <label className="mobile-concept-select">
-          YOUR WAY THROUGH
-          <select
-            aria-label="Choose a lesson section"
-            disabled={!!busy}
-            value={index}
-            onChange={(e) => select(+e.target.value)}
-          >
-            {lesson.blocks.map((b, i) => (
-              <option value={i} key={b.id}>
-                {b.title}
-              </option>
+        <details className="mobile-section-picker">
+          <summary>
+            <span>
+              <small>Lesson sections</small>
+              <strong>{block.title}</strong>
+            </span>
+            <ChevronDown size={18} aria-hidden="true" />
+          </summary>
+          <nav aria-label="Choose a lesson section">
+            {lesson.blocks.map((section, sectionIndex) => (
+              <button
+                key={section.id}
+                type="button"
+                disabled={!!busy}
+                aria-current={index === sectionIndex ? "step" : undefined}
+                onClick={(event) => {
+                  const picker = event.currentTarget.closest("details");
+                  select(sectionIndex);
+                  if (picker) {
+                    picker.open = false;
+                    picker.querySelector("summary")?.focus({ preventScroll: true });
+                  }
+                }}
+              >
+                {section.title}
+              </button>
             ))}
-          </select>
-        </label>
+          </nav>
+        </details>
         <div className="studio-heading">
           <div>
             <span className="chapter-label">
