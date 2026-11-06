@@ -1,4 +1,4 @@
-"""PageAble Python AI service. API keys never reach the browser."""
+"""StudyLens Python AI service. API keys never reach the browser."""
 from __future__ import annotations
 import asyncio
 import base64
@@ -23,7 +23,7 @@ from .engine import check_answer, validate_quotes, validate_scene, RUBRICS
 
 ROOT = Path(__file__).resolve().parents[1]
 Image.MAX_IMAGE_PIXELS = 20_000_000
-app = FastAPI(title='PageAble AI service', docs_url='/api/docs', redoc_url=None)
+app = FastAPI(title='StudyLens AI service', docs_url='/api/docs', redoc_url=None)
 sessions: dict[str, dict] = {}
 rates: dict[str, deque] = defaultdict(deque)
 speech_lock = asyncio.Semaphore(1)

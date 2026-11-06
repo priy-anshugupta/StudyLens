@@ -59,7 +59,7 @@ export async function recordWav(): Promise<{
     throw error;
   }
   const source = context.createMediaStreamSource(stream);
-  const processor = new AudioWorkletNode(context, "pageable-recorder");
+  const processor = new AudioWorkletNode(context, "studylens-recorder");
   const silent = context.createGain();
   silent.gain.value = 0;
   const frames: Float32Array[] = [];

@@ -63,11 +63,11 @@ import { parseSavedLesson } from "./session-lesson";
 
 function Brand({ onClick }: { onClick: () => void }) {
   return (
-    <button className="brand" onClick={onClick} aria-label="PageAble home">
+    <button className="brand" onClick={onClick} aria-label="StudyLens home">
       <span className="brand-mark">
         <BookOpen size={22} strokeWidth={1.7} />
       </span>
-      Page<span className="brand-able">Able</span>
+      Study<span className="brand-lens">Lens</span>
       <span className="brand-dot">.</span>
     </button>
   );
@@ -1114,7 +1114,7 @@ function App() {
               </h2>
               <p>
                 A little more space. A slower explanation. A voice alongside the
-                words. PageAble gives you choices, without asking you to fit a
+                words. StudyLens gives you choices, without asking you to fit a
                 label.
               </p>
               <div className="preference-tags">
@@ -2240,7 +2240,7 @@ function App() {
           <Brand onClick={() => navigate("home")} />
           <span>More ways in. More possibilities ahead.</span>
           <button className="text-btn" onClick={() => setInfoOpen(true)}>
-            Made for Neural Storm 2026 <ArrowUpRight size={13} />
+            About StudyLens <ArrowUpRight size={13} />
           </button>
         </footer>
       )}
@@ -2461,7 +2461,7 @@ function App() {
                   <RotateCcw size={14} /> Refresh connection settings
                 </button>
                 <p>
-                  PageAble is a Neural Storm 2026 prototype for HI-03:
+                  StudyLens began as PageAble, a Neural Storm 2026 prototype for
                   accessible adaptive learning.
                 </p>
                 <div className="connection-row">

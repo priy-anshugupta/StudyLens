@@ -1,12 +1,13 @@
 <div align="center">
 
-# PageAble
+# StudyLens
 ### Your textbook. Your way in.
 
 Turn a textbook page into an explanation you can **read, explore visually, listen to, explain back, and practise**.
 
-**Neural Storm 2026 · Human Impact · HI-03**  
-**Solo participant: Priyanshu Gupta**
+**Interactive textbook lessons with visual walkthroughs and voice questions**
+
+**Built by Priyanshu Gupta**
 
 [Problem & solution](#the-problem) · [Features](#what-you-can-do) · [Run locally](#run-locally) · [Architecture](#how-it-works) · [Verification](#verification-and-results) · [Demo](#a-three-minute-demo)
 
@@ -14,15 +15,15 @@ Turn a textbook page into an explanation you can **read, explore visually, liste
 
 ---
 
-![PageAble homepage — Your textbook. Your way in.](docs/screenshots/homepage.jpg)
+![Original PageAble prototype homepage](docs/screenshots/homepage.jpg)
 
-[View the full homepage screenshot](docs/screenshots/homepage-full.jpg)
+[View the full screenshot from the original prototype](docs/screenshots/homepage-full.jpg)
 
 ## The problem
 
 A printed textbook usually offers one presentation of an idea. A learner may need shorter passages, a diagram they can explore, spoken explanations, larger text, or a chance to explain the idea in their own words. Switching between separate tools also separates explanations from the page they came from.
 
-PageAble addresses **HI-03: Adaptive Learning for Students with Disabilities** through learner-controlled presentation and interaction. It does not infer a disability, diagnose learning needs, or claim that an accessibility preference establishes a learning style.
+StudyLens gives learners control over presentation and interaction. It does not infer a disability, diagnose learning needs, or claim that an accessibility preference establishes a learning style.
 
 ## The solution
 
@@ -36,15 +37,12 @@ The same confirmed source stays available throughout. Explanations and feedback 
 
 | Item | Detail |
 | --- | --- |
-| Event | [Neural Storm 2026](https://neuralstorm.devpost.com/) |
-| Track | Human Impact — Healthcare, Education & Social Good |
-| Problem statement | HI-03 — Adaptive Learning for Students with Disabilities |
-| Participant | Priyanshu Gupta, participating solo |
+| Project origin | [PageAble](https://github.com/priy-anshugupta/PageAble), originally submitted to [Neural Storm 2026](https://neuralstorm.devpost.com/) under HI-03 |
 | Primary AI/ML language | Python |
 | AI integration | OpenAI for page understanding and structured lessons; Gnani.ai for speech |
 | Interface | React, TypeScript, Vite and authored CSS |
 | Status | Functional local prototype; live provider smoke checks completed |
-| Public repository | [priy-anshugupta/PageAble](https://github.com/priy-anshugupta/PageAble) |
+| Public repository | [priy-anshugupta/StudyLens](https://github.com/priy-anshugupta/StudyLens) |
 | Full hosted application | Not deployed yet; the local Python-backed app is the complete supported demo |
 
 ## What you can do
@@ -110,8 +108,8 @@ An authored Hindi sample preview is included. **Uploaded general lessons are cur
 ### 1. Clone and install
 
 ```bash
-git clone https://github.com/priy-anshugupta/PageAble.git
-cd PageAble
+git clone https://github.com/priy-anshugupta/StudyLens.git
+cd StudyLens
 npm ci
 python -m venv .venv
 ```
@@ -199,8 +197,8 @@ Open `http://127.0.0.1:5173/`. Vite proxies `/api` to Python. If PowerShell bloc
 ### Docker
 
 ```bash
-docker build -t pageable .
-docker run --rm --env-file .env -p 8000:8000 pageable
+docker build -t studylens .
+docker run --rm --env-file .env -p 8000:8000 studylens
 ```
 
 The Dockerfile builds the frontend and runs one Python API worker. This configuration is provided for deployment; a Docker build was not executed in the recorded local verification. Provider secrets belong in the host's environment or secret manager.

@@ -1,4 +1,4 @@
-# PageAble UI and flow audit
+# StudyLens UI and flow audit
 
 Audit date: 2026-11-04. Scope: local application at http://127.0.0.1:8000/.
 
