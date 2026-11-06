@@ -549,7 +549,7 @@ export default function GeneralStudio({
               {t === "explore"
                   ? "1. Understand"
                 : t === "explain"
-                  ? "2. Explain it"
+                  ? "2. Explain it back"
                   : "3. Practise"}
             </button>
           ))}

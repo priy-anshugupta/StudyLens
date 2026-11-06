@@ -45,7 +45,7 @@ export default function ConceptVisual({ lessonId, blockId, onSpeak, onStop, busy
   if (!plan) return <section className="concept-invite">
     <div className="concept-invite-icon"><Lightbulb size={30} /></div>
     <div><span className="eyebrow">ANOTHER WAY INTO THE IDEA</span><h2>Read it. See it. Make it click.</h2><p>Turn this section into a clickable diagram, with a written explanation at every step.</p></div>
-    <button className="btn btn-small" disabled={loading || busy} onClick={() => void build()}>{loading ? <LoaderCircle className="spin" size={17} /> : <Play size={17} />}{loading ? "Drawing your explanation…" : "See it explained"}</button>
+    <button className="btn btn-small" disabled={loading || busy} onClick={() => void build()}>{loading ? <LoaderCircle className="spin" size={17} /> : <Play size={17} />}{loading ? "Building the diagram…" : "View diagram"}</button>
     {error && <p className="concept-error" role="alert">{error} <button className="text-btn" onClick={() => void build()} disabled={loading}>Try again</button></p>}
     {loading && <p className="concept-wait" role="status">Reading the page and connecting the ideas. Your text stays available above.</p>}
   </section>;

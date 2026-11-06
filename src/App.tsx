@@ -589,6 +589,20 @@ function App() {
     setAskAnswer("");
     setAskOpen(true);
   }
+  function focusSourceReview(version: number) {
+    requestAnimationFrame(() => {
+      if (version !== importVersion.current) return;
+      const source = document.querySelector<HTMLTextAreaElement>("#source-text");
+      if (source) {
+        source.setSelectionRange(0, 0);
+        source.scrollTop = 0;
+      }
+      const heading = document.getElementById("source-review-heading");
+      heading?.focus({ preventScroll: true });
+      document.getElementById("source-review")?.scrollIntoView({ block: "start", behavior: "instant" });
+    });
+  }
+
   async function upload(file: File) {
     if (importLock.current) return;
     setError("");
@@ -624,10 +638,7 @@ function App() {
       setDocId(data.document_id);
       setImportStage("review");
       notify("Page read. Check the extracted text, then choose Build my lesson.");
-      requestAnimationFrame(() => {
-        document.getElementById("source-text")?.focus();
-        document.getElementById("source-review")?.scrollIntoView({ block: "center", behavior: "instant" });
-      });
+      focusSourceReview(version);
     } catch (e) {
       URL.revokeObjectURL(preview);
       if (version === importVersion.current) setError((e as Error).message + " Your previous text has been kept. Choose the image again to retry, or paste the text.");
@@ -653,7 +664,7 @@ function App() {
       setUploadPreview("/testing/" + name + ".png");
       setUploadName(name[0].toUpperCase() + name.slice(1) + " · example page");
       setImportStage("review");
-      requestAnimationFrame(() => document.getElementById("source-text")?.focus());
+      focusSourceReview(version);
     } catch (e) {
       if (version === importVersion.current) setError((e as Error).message);
     } finally {
@@ -1988,12 +1999,12 @@ function App() {
                 }}
               />
               <button
-                className="btn"
+                className={uploadPreview ? "text-btn replace-page-btn" : "btn"}
                 disabled={!!busy}
                 onClick={() => fileInput.current?.click()}
               >
                 <Upload size={17} />{" "}
-                {busy === "Reading your page" ? "Reading your image…" : uploadPreview ? "Replace page image" : "Choose a page image"}
+                {busy === "Reading your page" ? "Reading your image…" : uploadPreview ? "Replace image" : "Choose a page image"}
               </button>
               {(pendingUploadName || uploadName) && <p className="selected-page-name">{pendingUploadName ? "Reading: " : "Selected: "}{pendingUploadName || uploadName}</p>}
               <span className="file-note" id="upload-help">
@@ -2010,11 +2021,11 @@ function App() {
             <div className="source-review" id="source-review" aria-busy={!!busy}>
               <div className="eyebrow">
                 {importStage === "review"
-                  ? "STEP 2 · CHECK THE EXTRACTED TEXT"
+                  ? "STEP 2 · CHECK YOUR PAGE"
                   : "OR PASTE YOUR PAGE TEXT"}
               </div>
-              <h3>
-                {importStage === "review" ? "Is this what your page says?" : "Already have the words?"}
+              <h3 id="source-review-heading" tabIndex={-1}>
+                {importStage === "review" ? (docId ? "Review extracted text" : "Review page text") : "Already have the words?"}
               </h3>
               <label className="field-label" htmlFor="source-text">
                 SOURCE TEXT

@@ -64,7 +64,7 @@ The same confirmed source stays available throughout. Explanations and feedback 
 
 ### 3. Understand visually and in words
 
-Choose **See it explained** to build a diagram for the current section.
+Choose **View diagram** to build a diagram for the current section.
 
 - Reusable layouts support processes, cycles, timelines, comparisons and concept relationships.
 - Clicking an element highlights its written explanation; clicking a step highlights the relevant elements.
@@ -308,7 +308,7 @@ See [EVALUATION.md](EVALUATION.md) and [UI_AUDIT.md](UI_AUDIT.md) for checkpoint
 
 1. **Show the problem:** a textbook page can be hard to approach through text alone.
 2. **Upload or load an example:** choose Photosynthesis under Upload a page. Check the source, then build the lesson.
-3. **Explain in two ways:** read a section, choose See it explained, click a visual element and its written step, then try narration.
+3. **Explain in two ways:** read a section, choose **View diagram**, click a visual element and its written step, then try narration.
 4. **Check understanding:** explain the concept in your own words, inspect feedback, and answer a practice question.
 5. **Show evidence:** open the source passage and recap; distinguish actual attempts from mastery claims.
 6. **Show the offline fallback:** open the fraction sample, change a bar/number line and demonstrate an exact checked question.

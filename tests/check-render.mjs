@@ -31,9 +31,9 @@ try {
   const output = renderToStaticMarkup(React.createElement(GeneralStudio, props));
   assert.match(output, /id="general-tab-explore" class="active" aria-selected="true"/);
   assert.match(output, /role="tabpanel" aria-labelledby="general-tab-explore"/);
-  assert.match(output, /See it explained/);
+  assert.match(output, /View diagram/);
   assert.match(output, /1\. Understand/);
-  assert.match(output, /2\. Explain it/);
+  assert.match(output, /2\. Explain it back/);
   assert.match(output, /3\. Practise/);
   assert(!output.includes("fractions"), "A science lesson must not inherit fraction UI");
   const recap = renderToStaticMarkup(React.createElement(GeneralStudio, { ...props, recap: true }));
