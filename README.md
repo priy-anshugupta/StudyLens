@@ -9,7 +9,7 @@ Turn a textbook page into an explanation you can **read, explore visually, liste
 
 **Built by Priyanshu Gupta**
 
-[Problem & solution](#the-problem) · [Features](#what-you-can-do) · [Run locally](#run-locally) · [Architecture](#how-it-works) · [Verification](#verification-and-results) · [Demo](#a-three-minute-demo)
+[Solution pitch](SOLUTION-PITCH.md) · [Problem & solution](#the-problem) · [Features](#what-you-can-do) · [Run locally](#run-locally) · [Architecture](#how-it-works) · [Verification](#verification-and-results) · [Demo](#a-three-minute-demo)
 
 </div>
 
